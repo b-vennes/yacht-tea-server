@@ -27,7 +27,7 @@ namespace YachtTea.Controllers
         [HttpPost("query")]
         public async Task<IActionResult> QueryGame([FromBody] GameQueryMessage queryMessage)
         {
-            var query = new GameQuery(queryMessage.Id);
+            var query = new GameQuery(queryMessage.UserId);
 
             GameView gameView;
 
@@ -37,7 +37,7 @@ namespace YachtTea.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error occurred in game query with id {query.GameId}: {ex.Message}.");
+                _logger.LogError($"Error occurred in game query for user {query.UserId}: {ex.Message}.");
 
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError); 
             }

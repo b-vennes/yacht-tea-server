@@ -5,11 +5,11 @@ namespace YachtTea.Queries
 
     public class GameQuery : IQuery<GameView>
     {
-        public int GameId { get; }
+        public string UserId { get; }
 
-        public GameQuery(int gameId)
+        public GameQuery(string userId)
         {
-            GameId = gameId;
+            UserId = userId;
         }
     }
 }

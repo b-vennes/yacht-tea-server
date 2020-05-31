@@ -17,7 +17,7 @@ namespace YachtTea.Queries.Handlers
 
         public override Task<GameView> ExecuteAsync(GameQuery query, CancellationToken cancellationToken = default)
         {
-            _logger.LogInformation($"Handling game query with game id {query.GameId}.");
+            _logger.LogInformation($"Handling game query from user {query.UserId}.");
 
             var testScorecardView = new ScorecardView
             {
@@ -44,8 +44,6 @@ namespace YachtTea.Queries.Handlers
 
             var testGameView = new GameView
             {
-                GameId = 1,
-                UserId = 1,
                 Scorecard = testScorecardView
             };
 

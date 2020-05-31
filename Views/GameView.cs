@@ -11,10 +11,6 @@ namespace YachtTea.Views
             Scorecard = new ScorecardView();
         }
 
-        public int UserId { get; set; }
-
-        public int GameId { get; set; }
-
         public int TurnNumber { get; set; }
 
         public ScorecardView Scorecard { get; set; }
