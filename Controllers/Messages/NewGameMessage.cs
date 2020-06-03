@@ -1,6 +1,6 @@
 namespace YachtTea.Controllers.Messages
 {
-    public class GameQueryMessage
+    public class NewGameMessage
     {
         public string UserId { get; set; }
     }

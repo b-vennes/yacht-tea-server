@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.9.1" />
     <PackageReference Include="Paramore.Brighter" Version="8.1.1036" />
     <PackageReference Include="Paramore.Darker" Version="2.0.78" />
     <PackageReference Include="Paramore.Darker.AspNetCore" Version="2.0.78" />

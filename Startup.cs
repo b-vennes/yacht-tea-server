@@ -13,8 +13,13 @@ namespace YachtTea
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
     using Microsoft.OpenApi.Models;
+    using Paramore.Brighter.Extensions;
     using Paramore.Darker.AspNetCore;
     using YachtTea.Queries.Handlers;
+    using YachtTea.Actions.Handlers;
+    using Paramore.Brighter;
+    using YachtTea.Actions;
+    using YachtTea.Repositories;
 
     public class Startup
     {
@@ -28,8 +33,25 @@ namespace YachtTea
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IGameRepository, GameRepository>();
+
             services.AddDarker()
                 .AddHandlersFromAssemblies(typeof(GameQueryHandler).Assembly);
+
+            services.AddTransient<NewGameActionHandlerAsync>();
+
+            services.AddTransient<IAmACommandProcessor>((provider) => {
+                var registry = new SubscriberRegistry();
+                registry.RegisterAsync<NewGameAction, NewGameActionHandlerAsync>();
+
+                var commandProcessorBuilder = CommandProcessorBuilder.With()
+                    .Handlers(new HandlerConfiguration(registry, new ActionHandlerFactoryAsync(provider)))
+                    .DefaultPolicy()
+                    .NoTaskQueues()
+                    .RequestContextFactory(new InMemoryRequestContextFactory());
+                
+                return commandProcessorBuilder.Build();
+            });
 
             services.AddControllers();
 

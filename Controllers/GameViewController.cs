@@ -6,28 +6,27 @@ namespace YachtTea.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Paramore.Darker;
-    using YachtTea.Controllers.Messages;
     using YachtTea.Queries;
     using YachtTea.Views;
 
     [Route("[controller]")]
     [ApiController]
-    public class GameController : ControllerBase
+    public class GameViewController : ControllerBase
     {
-        private readonly ILogger<GameController> _logger;
+        private readonly ILogger<GameViewController> _logger;
 
         private readonly IQueryProcessor _queryProcessor;
 
-        public GameController(ILogger<GameController> logger, IQueryProcessor queryProcessor)
+        public GameViewController(ILogger<GameViewController> logger, IQueryProcessor queryProcessor)
         {
             _logger = logger;
             _queryProcessor = queryProcessor;
         }
 
-        [HttpPost("query")]
-        public async Task<IActionResult> QueryGame([FromBody] GameQueryMessage queryMessage)
+        [HttpGet("query")]
+        public async Task<IActionResult> QueryGame([FromQuery] string userId)
         {
-            var query = new GameQuery(queryMessage.UserId);
+            var query = new GameQuery(userId);
 
             GameView gameView;
 

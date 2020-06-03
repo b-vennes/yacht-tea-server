@@ -1,10 +1,7 @@
-namespace YachtTea.Views
+namespace YachtTea.Repositories.Models
 {
-    /// <summary>
-    /// The view for a player's score card.
-    /// </summary>
-    public class ScorecardView
-    {   
+    public class Scorecard
+    {
         public int? Ones { get; set; }
 
         public int? Twos { get; set; }
@@ -32,13 +29,5 @@ namespace YachtTea.Views
         public int? Chance { get; set; }
 
         public int YachtTeaBonusCount { get; set; }
-
-        public int? YachtTeaBonusTotal { get; set; }
-
-        public int? UpperBonus { get; set; }
-
-        public int UpperTotal { get; set; }
-
-        public int LowerTotal { get; set; }
     }
 }
